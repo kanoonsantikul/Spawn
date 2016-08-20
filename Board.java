@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Write a description of class Board here.
@@ -6,14 +6,36 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Board extends Actor
+public class Board  
 {
-    /**
-     * Act - do whatever the Board wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
+    private final int INITIAL_X = 53 + Card.WIDTH + Tile.WIDTH/2;
+    private final int INITIAL_Y = 35 + Tile.HEIGHT/2;
+    private final int BOARD_WIDTH = 6;
+    private final int BOARD_HEIGHT = 6;
+     
+    private Tile[][] tiles;
+    
+    public Board(World world)
     {
-        // Add your action code here.
-    }    
+        tiles = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
+        setup(world);
+    }
+    
+    private void setup(World world){
+        
+        for(int i=0; i<BOARD_WIDTH; i++){
+            for(int j=0; j<BOARD_HEIGHT; j++){
+                Tile tile = new Tile();
+                if((i+j)%2 == 0){
+                    tile.setType(Tile.GREEN_TYPE);
+                } else{
+                    tile.setType(Tile.WHITE_TYPE);
+                }
+                world.addObject(tile, 
+                        INITIAL_X + (Tile.WIDTH * j), 
+                        INITIAL_Y + (Tile.HEIGHT * i));
+            }
+        }
+        
+    }
 }

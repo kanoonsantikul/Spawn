@@ -8,25 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Card extends Actor
 {
-    private int width;
-    private int height;
+    public static final int WIDTH = 141;
+    public static final int HEIGHT = 145;
     
     public Card(){
-        setImage("card.png");
-        width = getImage().getWidth();
-        height = getImage().getHeight();
     }
     
     public void act() 
     {
         // Add your action code here.
-    }
-    
-    public int getWidth(){
-        return width;
-    }
-    
-    public int getHeight(){
-        return height;
     }
 }

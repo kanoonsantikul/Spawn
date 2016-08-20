@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Tile
+comment0.text=\n\ Write\ a\ description\ of\ class\ Tile\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=type
+comment1.target=Tile(byte)
+comment2.params=
+comment2.target=Tile()
+comment3.params=
+comment3.target=void\ act()
+comment4.params=type
+comment4.target=void\ setType(byte)
+numComments=5

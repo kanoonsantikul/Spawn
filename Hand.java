@@ -6,11 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Hand extends Actor{
+public class Hand{
     public static final byte ME_TYPE = 1;
     public static final byte ENEMY_TYPE = 2;
     
-    private static final int fullHand = 4;
+    private final int fullHand = 4;
         
     private int cardNum;
     private Card[] cards;
@@ -61,16 +61,16 @@ public class Hand extends Actor{
     private int getCardY(int slotNum, Card card){
         int y;
         slotNum++;
-        y = (BackgroundWorld.worldHeight * slotNum/fullHand) 
-                - (card.getHeight()/2) - 8;
+        y = (BackgroundWorld.HEIGHT * slotNum/fullHand) 
+                - (Card.HEIGHT/2) - 8;
         return y;
     }
     
     private int getCardX(Card card){
         int x;
-        x = 26 + card.getWidth()/2;
+        x = 26 + Card.WIDTH/2;
         if(type == ENEMY_TYPE){
-            x = BackgroundWorld.worldWidth - x;
+            x = BackgroundWorld.WIDTH - x;
         }
         return x;
     }

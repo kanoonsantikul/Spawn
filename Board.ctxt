@@ -1,7 +1,8 @@
 #BlueJ class context
 comment0.target=Board
 comment0.text=\n\ Write\ a\ description\ of\ class\ Board\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=
-comment1.target=void\ act()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ Board\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
-numComments=2
+comment1.params=world
+comment1.target=Board(greenfoot.World)
+comment2.params=world
+comment2.target=void\ setup(greenfoot.World)
+numComments=3
