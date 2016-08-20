@@ -33,8 +33,12 @@ public class BackgroundWorld extends World
      * That is: create the initial objects and add them to the world.
      */
     private void prepare()
-    {    
-        manager = new Manager(this);
+    {   
         board = new Board(this);
+        manager = new Manager(this);
+    }
+    
+    public Board getBoard(){
+        return board;
     }
 }

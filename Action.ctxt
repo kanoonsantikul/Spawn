@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Action
+comment0.text=\n\ Write\ a\ description\ of\ class\ Action\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=world\ actor
+comment1.target=void\ spawn(greenfoot.World,\ greenfoot.Actor)
+numComments=2
