@@ -6,14 +6,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Me extends Actor
+public class Me extends Creature
 {
-    /**
-     * Act - do whatever the Me wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public Me(){
+        range = 1;
+    }
+    
     public void act() 
     {
         // Add your action code here.
-    }    
+    }
 }

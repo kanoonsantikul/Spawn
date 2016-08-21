@@ -15,12 +15,15 @@ public class Tile extends Actor{
 
     private byte type;
     private boolean isEmpty = true;
+    private int position;
 
-    public Tile(byte type){
+    public Tile(byte type, int position){
         setType(type);
+        this.position = position;
     }
 
-    public Tile(){
+    public Tile(int position){
+        this.position = position;
     }
 
     public void setType(byte type){
@@ -38,5 +41,9 @@ public class Tile extends Actor{
 
     public void setEmptiness(boolean isEmpty){
         this.isEmpty = isEmpty;
+    }
+    
+    public int getPosition(){
+        return position;
     }
 }

@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Creature
+comment0.text=\n\ Write\ a\ description\ of\ class\ Creature\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=int\ getRange()
+comment2.params=position
+comment2.target=void\ setPosition(int)
+comment3.params=
+comment3.target=int\ getPosition()
+numComments=4

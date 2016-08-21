@@ -2,7 +2,7 @@
 comment0.target=Manager
 comment0.text=\n\ Write\ a\ description\ of\ class\ Card\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=world
-comment1.target=Manager(greenfoot.World)
+comment1.target=Manager(BackgroundWorld)
 comment2.params=
 comment2.target=void\ act()
 numComments=3

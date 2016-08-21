@@ -27,7 +27,7 @@ public class Board
         
         for(int i=0; i<BOARD_WIDTH; i++){
             for(int j=0; j<BOARD_HEIGHT; j++){
-                Tile tile = new Tile();
+                Tile tile = new Tile(i*6 + j);
                 
                 if((i+j)%2 == 0){
                     tile.setType(Tile.GREEN_TYPE);
