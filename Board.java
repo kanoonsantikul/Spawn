@@ -9,7 +9,7 @@ import greenfoot.*;
 public class Board  
 {   
     private static final int INITIAL_X = 53 + Card.WIDTH + Tile.WIDTH/2;
-    private static final int INITIAL_Y = 35 + Tile.HEIGHT/2;
+    private static final int INITIAL_Y = 60 + Tile.HEIGHT/2;
     private static final int BOARD_WIDTH = 6;
     private static final int BOARD_HEIGHT = 6;
      
@@ -44,7 +44,7 @@ public class Board
         
     }
    
-    private Tile getTile(int tileNum){
+    public Tile getTile(int tileNum){
         int i = tileNum/6;
         int j = tileNum%6;
         return tiles[i][j];

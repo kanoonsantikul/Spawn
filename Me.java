@@ -11,9 +11,4 @@ public class Me extends Creature
     public Me(){
         range = 1;
     }
-    
-    public void act() 
-    {
-        // Add your action code here.
-    }
 }

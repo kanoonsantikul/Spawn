@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=EndTurnButton
+comment0.text=\n\ Write\ a\ description\ of\ class\ EndTurnButton\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=isActive
+comment1.target=EndTurnButton(boolean)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=isActive
+comment3.target=void\ setActive(boolean)
+comment4.params=listener
+comment4.target=void\ setListener(EndTurnButton.ClickCallbackListener)
+numComments=5

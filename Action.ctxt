@@ -1,16 +1,10 @@
 #BlueJ class context
 comment0.target=Action
 comment0.text=\n\ Write\ a\ description\ of\ class\ Action\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=world
-comment1.target=Action(BackgroundWorld)
-comment2.params=world\ actor
-comment2.target=void\ spawn(BackgroundWorld,\ Creature)
-comment3.params=target\ actor
-comment3.target=void\ moveTo(int,\ Creature)
-comment4.params=
-comment4.target=void\ animate()
-comment5.params=
-comment5.target=boolean\ isActing()
-comment6.params=
-comment6.target=void\ checkAction()
-numComments=7
+comment1.params=actor
+comment1.target=Action(Creature)
+comment2.params=
+comment2.target=Action()
+comment3.params=
+comment3.target=void\ act()
+numComments=4

@@ -12,6 +12,7 @@ public class Creature extends Actor
     
     protected int position;
     protected int range;
+    protected Action action;
     
     public int getRange(){
         return range;
@@ -23,5 +24,21 @@ public class Creature extends Actor
     
     public int getPosition(){
         return position;
+    }
+    
+    public void setAction(Action action){
+        this.action = action;
+    }
+    
+    public void removeAction(){
+        this.action = null;
+    }
+    
+    public boolean hasAction(){
+        return action != null;
+    }
+    
+    public void act(){
+        if(action != null)action.act();
     }
 }

@@ -13,9 +13,12 @@ public class BackgroundWorld extends World
     public static final int HEIGHT = 640; //640
     public static final int CELL_SIZE = 1;
 
-    private Manager manager;
     private Board board;
-    
+    private Manager manager;
+    private EndTurnButton endTurnButton;
+    private Hand myHand;
+    private Hand enemyHand;
+
     public BackgroundWorld()
     {    
         super(WIDTH, HEIGHT, CELL_SIZE); 
@@ -23,6 +26,9 @@ public class BackgroundWorld extends World
     }
     
     public void act(){
+        if(myHand != null) myHand.act();
+        if(enemyHand != null) enemyHand.act();
+        
         if(manager != null){
             manager.act();
         }
@@ -35,10 +41,21 @@ public class BackgroundWorld extends World
     private void prepare()
     {   
         board = new Board(this);
+        
+        myHand = new Hand(this, Hand.ME_TYPE);
+        enemyHand = new Hand(this, Hand.ENEMY_TYPE);
+        
+        endTurnButton = new EndTurnButton(true);
+        addObject(endTurnButton, 760, 40);
+        
         manager = new Manager(this);
     }
     
     public Board getBoard(){
         return board;
+    }
+    
+    public EndTurnButton getEndTurnButton(){
+        return endTurnButton;
     }
 }

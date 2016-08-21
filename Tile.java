@@ -16,6 +16,7 @@ public class Tile extends Actor{
     private byte type;
     private boolean isEmpty = true;
     private int position;
+    private ClickCallbackListener listener;
 
     public Tile(byte type, int position){
         setType(type);
@@ -24,6 +25,15 @@ public class Tile extends Actor{
 
     public Tile(int position){
         this.position = position;
+    }
+    
+    @Override
+    public void act(){
+        if(Greenfoot.mouseClicked(this)){
+            if(listener != null){
+                listener.tileClicked(position);
+            }
+        }
     }
 
     public void setType(byte type){
@@ -45,5 +55,13 @@ public class Tile extends Actor{
     
     public int getPosition(){
         return position;
+    }
+    
+    public void setListener(ClickCallbackListener listener){
+        this.listener = listener;
+    }
+    
+    public interface ClickCallbackListener{
+        public void tileClicked(int position);
     }
 }
