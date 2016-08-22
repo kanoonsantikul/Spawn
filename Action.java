@@ -8,7 +8,7 @@ import greenfoot.*;
  */
 public class Action{
     public Action(Creature actor){
-        actor.setAction(this);
+        actor.addAction(this);
     }
     
     public Action(){

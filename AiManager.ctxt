@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=AiManager
 comment0.text=\n\ Write\ a\ description\ of\ class\ AiManager\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=board
-comment1.target=void\ init(Board)
+comment1.params=board\ me
+comment1.target=void\ init(Board,\ Me)
 comment2.params=actor
 comment2.target=void\ addCreature(Creature)
 comment3.params=actors

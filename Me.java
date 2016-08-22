@@ -10,5 +10,6 @@ public class Me extends Creature
 {   
     public Me(){
         range = 1;
+        changeHealth(10);
     }   
 }

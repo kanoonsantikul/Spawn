@@ -22,6 +22,7 @@ public class BackgroundWorld extends World
     public BackgroundWorld()
     {    
         super(WIDTH, HEIGHT, CELL_SIZE); 
+        Greenfoot.setSpeed(65);
         prepare();
     }
     

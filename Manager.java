@@ -37,7 +37,7 @@ public class Manager implements
             new SpawnAction(world, enemy);
         }
         
-        AiManager.init(board);
+        AiManager.init(board, me);
         AiManager.addCreature(enemys);
         AiManager.setListener(this);
         
@@ -70,5 +70,6 @@ public class Manager implements
         world.getEndTurnButton().setActive(true);
         isMyTurn = true;
         me.setIsMoved(false);
+        world.getBoard().getPossibleRange(me);
     }
 }

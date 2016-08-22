@@ -15,4 +15,6 @@ comment6.params=tileNum
 comment6.target=boolean\ getEmptiness(int)
 comment7.params=tileNum\ isEmpty
 comment7.target=void\ setEmptiness(int,\ boolean)
-numComments=8
+comment8.params=actor
+comment8.target=void\ getPossibleRange(Creature)
+numComments=9

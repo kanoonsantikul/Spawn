@@ -12,7 +12,9 @@ public class Tile extends Actor{
 
     public static final byte GREEN_TYPE = 0;
     public static final byte WHITE_TYPE = 1;
-
+    public static final byte GREEN_ALPHA_TYPE = 2;
+    public static final byte WHITE_ALPHA_TYPE = 3;
+    
     private byte type;
     private boolean isEmpty = true;
     private int position;
@@ -35,13 +37,27 @@ public class Tile extends Actor{
             }
         }
     }
+    
+    public byte getType(){
+        return type;
+    }
 
     public void setType(byte type){
         this.type = type;
-        if(type == GREEN_TYPE){
-            setImage("green-tile.jpg");
-        } else if(type == WHITE_TYPE){
-            setImage("white-tile.jpg");
+        
+        switch(type){
+            case GREEN_TYPE:
+                setImage("green-tile.jpg");
+                break;
+            case WHITE_TYPE:
+                setImage("white-tile.jpg");
+                break;
+            case GREEN_ALPHA_TYPE:
+                setImage("white-tile-alpha.png");
+                break;
+            case WHITE_ALPHA_TYPE:
+                setImage("green-tile-alpha.png");
+                break;
         }
     }
 

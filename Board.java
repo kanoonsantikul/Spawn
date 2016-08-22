@@ -65,4 +65,27 @@ public class Board
     public void setEmptiness(int tileNum, boolean isEmpty){
         getTile(tileNum).setEmptiness(isEmpty);
     }
+    
+    public void getPossibleRange(Creature actor){
+        int actorPosition = actor.getPosition();
+        int range = actor.getRange();
+
+        int positionI = actorPosition/6;
+        int positionJ = actorPosition%6;
+        for(int i=positionI - range; i<=positionI + range; i++){
+            for(int j=positionJ - range; j<=positionJ + range; j++){
+                int position = (i*6 + j);
+                if(position != actorPosition
+                        && (i>=0 && j>=0)
+                        && (i<BOARD_HEIGHT && j<BOARD_WIDTH)){
+                    Tile tile = getTile(position);
+                    if(tile.getType() == Tile.WHITE_TYPE){
+                        tile.setType(Tile.WHITE_ALPHA_TYPE);  
+                    } else{
+                        tile.setType(Tile.GREEN_ALPHA_TYPE);
+                    }
+                }
+            }
+        }
+    }
 }

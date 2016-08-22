@@ -17,9 +17,10 @@ public class SpawnAction extends Action
         }while(!board.getEmptiness(position));
         
         world.addObject(actor,
-            board.getTileX(position), 
-            board.getTileY(position));
-        
+                board.getTileX(position), 
+                board.getTileY(position));
+        actor.drawHealthText();
+            
         board.setEmptiness(position, false);
         actor.setPosition(position);
     }
