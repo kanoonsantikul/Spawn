@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Write a description of class MoveAction here.
  * 
@@ -5,7 +7,7 @@
  * @version (a version number or a date)
  */
 public class MoveAction extends Action 
-{   
+{
     private Creature actor;
     private int targetX, targetY;
     private int speedX, speedY;
@@ -13,7 +15,7 @@ public class MoveAction extends Action
     public MoveAction(int position, Creature actor, Board board){
         super(actor);
         this.actor = actor;
-        
+ 
         int prevPosition = actor.getPosition();
         board.setEmptiness(prevPosition, true);
         board.setEmptiness(position, false);
@@ -40,6 +42,7 @@ public class MoveAction extends Action
         }
         if(actor.getX() == targetX && actor.getY() == targetY){
             actor.removeAction();
+            actor.setIsMoved(true);
         }
     }
 }

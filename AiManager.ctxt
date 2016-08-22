@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=AiManager
+comment0.text=\n\ Write\ a\ description\ of\ class\ AiManager\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=board
+comment1.target=void\ init(Board)
+comment2.params=actor
+comment2.target=void\ addCreature(Creature)
+comment3.params=actors
+comment3.target=void\ addCreature(java.util.ArrayList)
+comment4.params=
+comment4.target=void\ execute()
+comment5.params=
+comment5.target=void\ act()
+comment6.params=listener
+comment6.target=void\ setListener(AiManager.OnExecutionCompleteListener)
+numComments=7

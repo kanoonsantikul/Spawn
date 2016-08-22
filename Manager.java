@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * Write a description of class Card here.
@@ -8,13 +9,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Manager implements 
         EndTurnButton.ClickCallbackListener,
-        Tile.ClickCallbackListener
+        Tile.ClickCallbackListener,
+        AiManager.OnExecutionCompleteListener
 {    
     private BackgroundWorld world;
     private boolean isMyTurn = true;
     
-    private Creature me;
-    private Creature[] enemys;
+    private Me me;
+    private ArrayList<Creature> enemys;
     
     public Manager(BackgroundWorld world){
         this.world = world;
@@ -28,38 +30,45 @@ public class Manager implements
         me = new Me();
         new SpawnAction(world, me);
         
-        enemys = new Enemy[3];
+        enemys = new ArrayList<Creature>();
         for(int i=0; i<3; i++){
             Enemy enemy = new Enemy();
-            enemys[i] = enemy;
+            enemys.add(enemy);
             new SpawnAction(world, enemy);
         }
-    }
-    
-    public void act(){
-        me.act();
-        if(!isMyTurn){
-            Board board = world.getBoard();
-            int i = Greenfoot.getRandomNumber(3);
-            if(!enemys[i].hasAction()){
-                int position;
-                do{
-                    position = Greenfoot.getRandomNumber(Board.BOARD_NUM);
-                }while(!board.getEmptiness(position));
-                new MoveAction(position, enemys[i], board);
-            }
-        }
+        
+        AiManager.init(board);
+        AiManager.addCreature(enemys);
+        AiManager.setListener(this);
+        
+        setupStartTurn();
     }
     
     @Override
-    public void endTurnClicked(boolean isActive){
-        isMyTurn = isActive;
+    public void endTurnClicked(){
+        isMyTurn = false;
+        AiManager.execute();
     }
     
     @Override
     public void tileClicked(int position){
-        if(!me.hasAction() && isMyTurn){
+        if(!me.hasAction() && isMyTurn && !me.getIsMoved()){
             new MoveAction(position, me, world.getBoard());
         }
+    }
+    
+    @Override
+    public void onExecutionComplete(){
+        setupStartTurn();
+    }
+    
+    public void act(){
+        AiManager.act();
+    }
+
+    private void setupStartTurn(){
+        world.getEndTurnButton().setActive(true);
+        isMyTurn = true;
+        me.setIsMoved(false);
     }
 }

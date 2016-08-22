@@ -17,10 +17,10 @@ public class EndTurnButton extends Actor
     
     @Override
     public void act(){
-        if(Greenfoot.mouseClicked(this)){
-            setActive(!isActive);
+        if(Greenfoot.mouseClicked(this) && isActive){
+            setActive(false);
             if(listener != null){
-                listener.endTurnClicked(isActive);
+                listener.endTurnClicked();
             }
         }
     }
@@ -39,6 +39,6 @@ public class EndTurnButton extends Actor
     }
     
     public interface ClickCallbackListener{
-        public void endTurnClicked(boolean isActive);
+        public void endTurnClicked();
     }
 }

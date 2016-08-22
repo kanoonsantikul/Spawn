@@ -12,6 +12,7 @@ public class Creature extends Actor
     
     protected int position;
     protected int range;
+    protected boolean isMoved = false;
     protected Action action;
     
     public int getRange(){
@@ -26,6 +27,14 @@ public class Creature extends Actor
         return position;
     }
     
+    public void setIsMoved(boolean isMoved){
+        this.isMoved = isMoved;
+    }
+    
+    public boolean getIsMoved(){
+        return isMoved;
+    }
+
     public void setAction(Action action){
         this.action = action;
     }
