@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.ArrayList;
 
 /**
  * Write a description of class Board here.
@@ -66,7 +67,9 @@ public class Board
         getTile(tileNum).setEmptiness(isEmpty);
     }
     
-    public void getPossibleRange(Creature actor){
+    public ArrayList<Tile> getPossibleRange(Creature actor){
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        
         int actorPosition = actor.getPosition();
         int range = actor.getRange();
 
@@ -78,13 +81,33 @@ public class Board
                 if(position != actorPosition
                         && (i>=0 && j>=0)
                         && (i<BOARD_HEIGHT && j<BOARD_WIDTH)){
-                    Tile tile = getTile(position);
-                    if(tile.getType() == Tile.WHITE_TYPE){
-                        tile.setType(Tile.WHITE_ALPHA_TYPE);  
-                    } else{
-                        tile.setType(Tile.GREEN_ALPHA_TYPE);
-                    }
+                            
+                    tiles.add(getTile(position));
                 }
+            }
+        }
+        
+        return tiles;
+    }
+    
+    public void showPossibleRange(ArrayList<Tile> tiles){
+        for(int i=0; i<tiles.size(); i++){
+            Tile tile = tiles.get(i);
+            if(tile.getType() == Tile.WHITE_TYPE){
+                tile.setType(Tile.WHITE_ALPHA_TYPE);  
+            } else if(tile.getType() == Tile.GREEN_TYPE){
+                tile.setType(Tile.GREEN_ALPHA_TYPE);
+            }
+        }
+    }
+    
+    public void hidePossibleRange(ArrayList<Tile> tiles){
+        for(int i=0; i<tiles.size(); i++){
+            Tile tile = tiles.get(i);
+            if(tile.getType() == Tile.WHITE_ALPHA_TYPE){
+                tile.setType(Tile.WHITE_TYPE);  
+            } else if(tile.getType() == Tile.GREEN_ALPHA_TYPE){
+                tile.setType(Tile.GREEN_TYPE);
             }
         }
     }

@@ -46,14 +46,24 @@ public class Manager implements
     
     @Override
     public void endTurnClicked(){
+        ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
+        world.getBoard().hidePossibleRange(tiles);
+        
         isMyTurn = false;
         AiManager.execute();
+
     }
     
     @Override
     public void tileClicked(int position){
         if(!me.hasAction() && isMyTurn && !me.getIsMoved()){
-            new MoveAction(position, me, world.getBoard());
+            ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
+            for(int i=0 ;i<tiles.size(); i++){
+                if(tiles.get(i).getPosition() == position){
+                    world.getBoard().hidePossibleRange(tiles);
+                    new MoveAction(position, me, world.getBoard());
+                }
+            }
         }
     }
     
@@ -70,6 +80,7 @@ public class Manager implements
         world.getEndTurnButton().setActive(true);
         isMyTurn = true;
         me.setIsMoved(false);
-        world.getBoard().getPossibleRange(me);
+        ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
+        world.getBoard().showPossibleRange(tiles);
     }
 }

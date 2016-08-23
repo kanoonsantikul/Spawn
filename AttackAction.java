@@ -33,12 +33,13 @@ public class AttackAction extends Action
                 isReachedTarget = true;
                 from.setIsMoved(false);
                
-                to.changeHealth(-1);
+                to.changeHealth(-1*from.getAttack());
                 to.drawHealthText();
                 moveAction = new MoveAction(tempPosition, from, board);
             }
         } else{
             if(from.getIsMoved()){
+                board.setEmptiness(to.getPosition(), false);
                 from.setIsAttacked(true);
                 from.removeAction(this);
             }

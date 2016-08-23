@@ -1,8 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
-import java.lang.InterruptedException;
+
 
 /**
  * Write a description of class Creature here.
@@ -15,6 +14,7 @@ public class Creature extends Actor
     public static final int SPEED = 1;
     
     protected int range;
+    protected int attack;
     protected int health;
     protected HealthText healthText;
     
@@ -30,6 +30,10 @@ public class Creature extends Actor
     
     public int getRange(){
         return range;
+    }
+    
+    public int getAttack(){
+        return attack;
     }
     
     public int getHealth(){
@@ -105,14 +109,6 @@ public class Creature extends Actor
     public class HealthText extends Actor{
         public HealthText(){
             setImage(new GreenfootImage(health+"", 20, Color.BLACK, new Color(0,0,0,0)));
-        }
-    }
-    
-    public static void delay(int sec){
-        try{
-            TimeUnit.SECONDS.sleep(sec);
-        } catch(InterruptedException e){
-            System.out.println("can't delay");
         }
     }
 }

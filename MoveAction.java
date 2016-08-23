@@ -18,8 +18,7 @@ public class MoveAction extends Action
         this.actor = actor;
         this.healthText = actor.getHealthText();
         
-        int prevPosition = actor.getPosition();
-        board.setEmptiness(prevPosition, true);
+        board.setEmptiness(actor.getPosition(), true);
         board.setEmptiness(position, false);
         actor.setPosition(position);
         
