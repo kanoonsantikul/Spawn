@@ -11,6 +11,7 @@ public class Card extends Actor
     public static final int WIDTH = 141;
     public static final int HEIGHT = 145;
     
+    
     public Card(){
     }
     

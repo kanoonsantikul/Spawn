@@ -34,7 +34,7 @@ public class Manager implements
         new SpawnAction(world, me);
         
         enemys = new ArrayList<Creature>();
-        for(int i=0; i<7; i++){
+        for(int i=0; i<4; i++){
             Enemy enemy = new Enemy();
             enemys.add(enemy);
             enemy.setListener(this);

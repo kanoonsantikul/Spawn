@@ -37,10 +37,10 @@ public class AttackAction extends Action
                 isReachedTarget = true;
                 from.setIsMoved(false);
                
-                to.changeHealth(-1*from.getAttack());
-                if(to.getHealth() < 1){
-                    to.kill();
-                }
+                to.getWorld().addObject(
+                        new AttackGraphic(to, from.getAttack()),
+                        to.getX(),
+                        to.getY());
                 moveAction = new MoveAction(tempFromPosition, from, board);
             }
         } else{

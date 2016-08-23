@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Enemy extends Creature
 {
     public Enemy(){
-        range = 2;
+        range = 1;
         attack = 1;
         health = 3;
     }
