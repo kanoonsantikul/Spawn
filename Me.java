@@ -11,6 +11,6 @@ public class Me extends Creature
     public Me(){
         range = 1;
         attack = 2;
-        changeHealth(10);
+        health = 10;
     }   
 }

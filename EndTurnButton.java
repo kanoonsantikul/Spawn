@@ -20,7 +20,7 @@ public class EndTurnButton extends Actor
         if(Greenfoot.mouseClicked(this) && isActive){
             setActive(false);
             if(listener != null){
-                listener.endTurnClicked();
+                listener.onEndTurnClicked();
             }
         }
     }
@@ -39,6 +39,6 @@ public class EndTurnButton extends Actor
     }
     
     public interface ClickCallbackListener{
-        public void endTurnClicked();
+        public void onEndTurnClicked();
     }
 }

@@ -14,6 +14,7 @@ public class BackgroundWorld extends World
     public static final int CELL_SIZE = 1;
 
     private Board board;
+    private Score score;
     private Manager manager;
     private EndTurnButton endTurnButton;
     private Hand myHand;
@@ -21,7 +22,7 @@ public class BackgroundWorld extends World
 
     public BackgroundWorld()
     {    
-        super(WIDTH, HEIGHT, CELL_SIZE); 
+        super(WIDTH, HEIGHT, CELL_SIZE);
         Greenfoot.setSpeed(65);
         prepare();
     }
@@ -39,7 +40,7 @@ public class BackgroundWorld extends World
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
-    private void prepare()
+    public void prepare()
     {   
         board = new Board(this);
         
@@ -49,11 +50,17 @@ public class BackgroundWorld extends World
         endTurnButton = new EndTurnButton(true);
         addObject(endTurnButton, 760, 40);
         
+        score = new Score(this);
+        
         manager = new Manager(this);
     }
     
     public Board getBoard(){
         return board;
+    }
+    
+    public Score getScore(){
+        return score;
     }
     
     public EndTurnButton getEndTurnButton(){

@@ -33,7 +33,7 @@ public class Tile extends Actor{
     public void act(){
         if(Greenfoot.mouseClicked(this)){
             if(listener != null){
-                listener.tileClicked(position);
+                listener.onTileClicked(position);
             }
         }
     }
@@ -78,6 +78,6 @@ public class Tile extends Actor{
     }
     
     public interface ClickCallbackListener{
-        public void tileClicked(int position);
+        public void onTileClicked(int position);
     }
 }

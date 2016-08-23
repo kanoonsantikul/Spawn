@@ -16,7 +16,8 @@ public class Creature extends Actor
     protected int range;
     protected int attack;
     protected int health;
-    protected HealthText healthText;
+    protected StateText stateText;
+    EventListener listener;
     
     protected int position;
     protected boolean isMoved = false;
@@ -24,8 +25,21 @@ public class Creature extends Actor
     protected ArrayList<Action> actions;
     
     public Creature(){
-        healthText = new HealthText();
+        stateText = new StateText(health, attack);
         actions = new ArrayList<Action>();
+    }
+    
+    @Override
+    public void act(){
+        if(Greenfoot.mouseClicked(this)){
+            if(listener != null){
+                listener.onCreatureClicked(this);
+            }
+        }
+        
+        for(int i=0; i<actions.size(); i++){
+            actions.get(i).act();
+        }
     }
     
     public int getRange(){
@@ -42,19 +56,22 @@ public class Creature extends Actor
     
     public void changeHealth(int diff){
         health += diff;
+        drawStateText();
     }
     
-    public HealthText getHealthText(){
-        return healthText;
+    public StateText getStateText(){
+        return stateText;
     }
     
-    public void drawHealthText(){
+    public void drawStateText(){
         World world = getWorld();
-        world.removeObject(healthText);
-        healthText = new HealthText();
-        world.addObject(getHealthText(),
+        if(stateText != null){
+            world.removeObject(stateText);
+        }
+        stateText = new StateText(health, attack);
+        world.addObject(stateText,
                 getX(),
-                getY() - getImage().getHeight()/2);
+                getY() + getImage().getHeight()/2);
     }
     
     public void setPosition(int position){
@@ -100,15 +117,30 @@ public class Creature extends Actor
             return false;
     }
     
-    public void act(){
-        for(int i=0; i<actions.size(); i++){
-            actions.get(i).act();
+    public void kill(){
+        getWorld().removeObject(this.stateText);
+        getWorld().removeObject(this);
+        if(listener != null){
+            listener.onCreatureKilled(this);
         }
     }
     
-    public class HealthText extends Actor{
-        public HealthText(){
-            setImage(new GreenfootImage(health+"", 20, Color.BLACK, new Color(0,0,0,0)));
+    public class StateText extends Actor{
+        public StateText(int health, int attack){
+            setImage(new GreenfootImage(
+                    "ATK:" + attack + "  HP:" + health, 
+                    15, 
+                    Color.WHITE, 
+                    new Color(0, 0, 0, 150)));
         }
+    }
+    
+    public void setListener(EventListener listener){
+        this.listener = listener;
+    }
+    
+    public interface EventListener{
+        public void onCreatureClicked(Creature actor);
+        public void onCreatureKilled(Creature actor);
     }
 }

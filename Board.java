@@ -90,7 +90,9 @@ public class Board
         return tiles;
     }
     
-    public void showPossibleRange(ArrayList<Tile> tiles){
+    public void showPossibleRange(Creature actor){
+        ArrayList<Tile> tiles = getPossibleRange(actor);
+        
         for(int i=0; i<tiles.size(); i++){
             Tile tile = tiles.get(i);
             if(tile.getType() == Tile.WHITE_TYPE){
@@ -101,7 +103,9 @@ public class Board
         }
     }
     
-    public void hidePossibleRange(ArrayList<Tile> tiles){
+    public void hidePossibleRange(Creature actor){
+        ArrayList<Tile> tiles = getPossibleRange(actor);
+        
         for(int i=0; i<tiles.size(); i++){
             Tile tile = tiles.get(i);
             if(tile.getType() == Tile.WHITE_ALPHA_TYPE){

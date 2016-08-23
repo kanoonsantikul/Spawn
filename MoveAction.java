@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class MoveAction extends Action 
 {
     private Creature actor;
-    private Creature.HealthText healthText;
+    private Creature.StateText stateText;
     private int targetX, targetY;
     private int speedX, speedY;
     
     public MoveAction(int position, Creature actor, Board board){
         super(actor);
         this.actor = actor;
-        this.healthText = actor.getHealthText();
+        this.stateText = actor.getStateText();
         
         board.setEmptiness(actor.getPosition(), true);
         board.setEmptiness(position, false);
@@ -37,11 +37,11 @@ public class MoveAction extends Action
     public void act(){
         if(targetX != actor.getX()){
             actor.setLocation(actor.getX() + speedX, actor.getY());
-            healthText.setLocation(healthText.getX() + speedX, healthText.getY());
+            stateText.setLocation(stateText.getX() + speedX, stateText.getY());
         }
         if(targetY != actor.getY()){
             actor.setLocation(actor.getX(), actor.getY() + speedY);
-            healthText.setLocation(healthText.getX(), healthText.getY() + + speedY);
+            stateText.setLocation(stateText.getX(), stateText.getY() + + speedY);
         }
         if(actor.getX() == targetX && actor.getY() == targetY){
             actor.removeAction(this);

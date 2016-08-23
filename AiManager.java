@@ -9,30 +9,34 @@ import java.util.ArrayList;
  */
 public class AiManager  
 {
-    private static Board board;
-    private static Me me;
-    private static ArrayList<Creature> creatures;
+    private Board board;
+    private Me me;
+    private ArrayList<Creature> creatures;
     
-    private static int queue;
-    private static boolean isExecuting = false;
-    private static OnExecutionCompleteListener listener;
-    private static ArrayList<Tile> tiles;
+    private int queue;
+    private boolean isExecuting = false;
+    private OnExecutionCompleteListener listener;
+    private ArrayList<Tile> tiles;
     
-    public static void init(Board board, Me me){
-        AiManager.board = board;
-        AiManager.me = me;
+    public AiManager(Board board, Me me){
+        this.board = board;
+        this.me = me;
         creatures = new ArrayList<Creature>();
     }
     
-    public static void addCreature(Creature actor){
+    public void addCreature(Creature actor){
         creatures.add(actor);
     }
     
-    public static void addCreature(ArrayList<Creature> actors){
+    public void addCreature(ArrayList<Creature> actors){
         creatures.addAll(actors);
     }
     
-    public static void execute(){
+    public void removeCreature(Creature actor){
+        creatures.remove(actor);
+    }
+    
+    public void execute(){
         for(int i=0; i<creatures.size(); i++){
             creatures.get(i).setIsMoved(false);
             creatures.get(i).setIsAttacked(false);
@@ -41,7 +45,7 @@ public class AiManager
         queue = 0;
     }
     
-    public static void act(){
+    public void act(){
         if(isExecuting){
             Creature actor = creatures.get(queue);
             if(!actor.getIsMoved()){
@@ -68,14 +72,15 @@ public class AiManager
         }
     }
     
-    private static void attack(Creature actor){
+    private void attack(Creature actor){
         tiles = board.getPossibleRange(actor);
-        board.showPossibleRange(tiles);
-        Greenfoot.delay(300);
-        board.hidePossibleRange(tiles);
-                    
+      
         for(int i=0; i<tiles.size(); i++){
             if(tiles.get(i).getPosition() == me.getPosition()){
+                board.showPossibleRange(actor);
+                Greenfoot.delay(400);
+                board.hidePossibleRange(actor);    
+                
                 new AttackAction(actor, me, board);
                 return;
             }
@@ -84,11 +89,11 @@ public class AiManager
         actor.setIsAttacked(true);
     }
     
-    private static void move(Creature actor){
+    private void move(Creature actor){
         tiles = board.getPossibleRange(actor);
-        board.showPossibleRange(tiles);
+        board.showPossibleRange(actor);
         Greenfoot.delay(300);
-        board.hidePossibleRange(tiles);
+        board.hidePossibleRange(actor);
     
         int position;
         do{
@@ -98,8 +103,8 @@ public class AiManager
         new MoveAction(tiles.get(position).getPosition(), actor, board);
     }
     
-    public static void setListener(OnExecutionCompleteListener listener){
-        AiManager.listener = listener;
+    public void setListener(OnExecutionCompleteListener listener){
+        this.listener = listener;
     }
         
     public interface OnExecutionCompleteListener{

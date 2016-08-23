@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class Manager implements 
         EndTurnButton.ClickCallbackListener,
         Tile.ClickCallbackListener,
+        Enemy.EventListener,
         AiManager.OnExecutionCompleteListener
 {    
     private BackgroundWorld world;
     private boolean isMyTurn = true;
     
+    private AiManager aiManager;
     private Me me;
     private ArrayList<Creature> enemys;
     
@@ -28,39 +30,39 @@ public class Manager implements
         }
         
         me = new Me();
+        me.setListener(this);
         new SpawnAction(world, me);
         
         enemys = new ArrayList<Creature>();
-        for(int i=0; i<3; i++){
+        for(int i=0; i<7; i++){
             Enemy enemy = new Enemy();
             enemys.add(enemy);
+            enemy.setListener(this);
             new SpawnAction(world, enemy);
         }
         
-        AiManager.init(board, me);
-        AiManager.addCreature(enemys);
-        AiManager.setListener(this);
+        aiManager = new AiManager(board, me);
+        aiManager.addCreature(enemys);
+        aiManager.setListener(this);
         
         setupStartTurn();
     }
     
     @Override
-    public void endTurnClicked(){
-        ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
-        world.getBoard().hidePossibleRange(tiles);
+    public void onEndTurnClicked(){
+        world.getBoard().hidePossibleRange(me);
         
         isMyTurn = false;
-        AiManager.execute();
-
+        aiManager.execute();
     }
     
     @Override
-    public void tileClicked(int position){
+    public void onTileClicked(int position){
         if(!me.hasAction() && isMyTurn && !me.getIsMoved()){
             ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
             for(int i=0 ;i<tiles.size(); i++){
                 if(tiles.get(i).getPosition() == position){
-                    world.getBoard().hidePossibleRange(tiles);
+                    world.getBoard().hidePossibleRange(me);
                     new MoveAction(position, me, world.getBoard());
                 }
             }
@@ -68,19 +70,52 @@ public class Manager implements
     }
     
     @Override
+    public void onCreatureClicked(Creature actor){
+        if(actor instanceof Enemy
+                && !me.hasAction() 
+                && isMyTurn 
+                && !me.getIsAttacked()){
+            ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
+            for(int i=0 ;i<tiles.size(); i++){
+                if(tiles.get(i).getPosition() == actor.getPosition()){
+                    world.getBoard().hidePossibleRange(me);
+                    new AttackAction(me, actor, world.getBoard());
+                }
+            }    
+        }
+    }
+    
+    @Override 
+    public void onCreatureKilled(Creature actor){
+        if(actor instanceof Enemy){
+            enemys.remove(actor);
+            aiManager.removeCreature(actor);
+        } else if(actor instanceof Me){
+            world.repaint();
+            Greenfoot.setWorld(new GameOver(world.getScore().getScore()));
+        }
+    }
+    
+    @Override
     public void onExecutionComplete(){
         setupStartTurn();
+        world.getScore().addScore();
     }
     
     public void act(){
-        AiManager.act();
+        if((!me.getIsMoved() || !me.getIsAttacked())
+                && isMyTurn
+                && !me.hasAction()){        
+            
+            world.getBoard().showPossibleRange(me);
+        }
+        aiManager.act();
     }
 
     private void setupStartTurn(){
         world.getEndTurnButton().setActive(true);
         isMyTurn = true;
         me.setIsMoved(false);
-        ArrayList<Tile> tiles = world.getBoard().getPossibleRange(me);
-        world.getBoard().showPossibleRange(tiles);
+        me.setIsAttacked(false);
     }
 }

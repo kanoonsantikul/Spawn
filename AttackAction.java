@@ -9,7 +9,9 @@ public class AttackAction extends Action
     private Creature from;
     private Creature to;
     private Board board;
-    private int tempPosition;
+    private int tempFromPosition;
+    private int tempToPosition;
+    private boolean tempIsMoved;
     
     private MoveAction moveAction;
     private boolean isReachedTarget;
@@ -19,7 +21,9 @@ public class AttackAction extends Action
         this.from = from;
         this.to = to;
         this.board = board;
-        tempPosition = from.getPosition();
+        tempFromPosition = from.getPosition();
+        tempToPosition = to.getPosition();
+        tempIsMoved = from.getIsMoved();
         from.setIsMoved(false);
     }
     
@@ -34,13 +38,16 @@ public class AttackAction extends Action
                 from.setIsMoved(false);
                
                 to.changeHealth(-1*from.getAttack());
-                to.drawHealthText();
-                moveAction = new MoveAction(tempPosition, from, board);
+                if(to.getHealth() < 1){
+                    to.kill();
+                }
+                moveAction = new MoveAction(tempFromPosition, from, board);
             }
         } else{
             if(from.getIsMoved()){
-                board.setEmptiness(to.getPosition(), false);
+                board.setEmptiness(tempToPosition, false);
                 from.setIsAttacked(true);
+                from.setIsMoved(tempIsMoved);
                 from.removeAction(this);
             }
         }
