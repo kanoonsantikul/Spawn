@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=CardMiniPotion
+comment0.text=\n\ Write\ a\ description\ of\ class\ CardThunderBolt\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=slotNum
+comment1.target=CardMiniPotion(int)
+numComments=2

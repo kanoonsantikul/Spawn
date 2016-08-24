@@ -10,7 +10,7 @@ public class Enemy extends Creature
 {
     public Enemy(){
         range = 1;
-        attack = 1;
+        attack = 3;
         health = 3;
     }
 }

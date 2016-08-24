@@ -11,7 +11,8 @@ public class Manager implements
         EndTurnButton.ClickCallbackListener,
         Tile.ClickCallbackListener,
         Enemy.EventListener,
-        AiManager.OnExecutionCompleteListener
+        AiManager.OnExecutionCompleteListener,
+        Card.ClickEventListener
 {    
     private BackgroundWorld world;
     private boolean isMyTurn = true;
@@ -24,6 +25,7 @@ public class Manager implements
         this.world = world;
         
         world.getEndTurnButton().setListener(this);
+        
         Board board = world.getBoard();
         for(int i=0; i<Board.BOARD_NUM; i++){
             board.getTile(i).setListener(this);
@@ -34,7 +36,7 @@ public class Manager implements
         new SpawnAction(world, me);
         
         enemys = new ArrayList<Creature>();
-        for(int i=0; i<4; i++){
+        for(int i=0; i<3; i++){
             Enemy enemy = new Enemy();
             enemys.add(enemy);
             enemy.setListener(this);
@@ -46,6 +48,16 @@ public class Manager implements
         aiManager.setListener(this);
         
         setupStartTurn();
+    }
+    
+    @Override 
+    public void onCardLeftClicked(int slotNum){
+       //world.getMyHand().getCard(slotNum).use(me, enemys, world.getBoard());
+    }
+    
+    @Override 
+    public void onCardRightClicked(int slotNum){
+        
     }
     
     @Override
@@ -105,8 +117,7 @@ public class Manager implements
     public void act(){
         if((!me.getIsMoved() || !me.getIsAttacked())
                 && isMyTurn
-                && !me.hasAction()){        
-            
+                && !me.hasAction()){
             world.getBoard().showPossibleRange(me);
         }
         aiManager.act();

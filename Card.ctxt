@@ -1,8 +1,18 @@
 #BlueJ class context
 comment0.target=Card
 comment0.text=\n\ Write\ a\ description\ of\ class\ Card\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=
-comment1.target=Card()
+comment1.params=slotNum
+comment1.target=Card(int)
 comment2.params=
 comment2.target=void\ act()
-numComments=3
+comment3.params=
+comment3.target=int\ getSlotNum()
+comment4.params=listener
+comment4.target=void\ setListener(Card.ClickEventListener)
+comment5.params=
+comment5.target=int\ getCardNum()
+comment6.params=show
+comment6.target=void\ showCardEffect(boolean)
+comment7.params=me\ enemys\ board
+comment7.target=void\ use(Me,\ java.util.ArrayList,\ Board)
+numComments=8

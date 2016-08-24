@@ -43,16 +43,16 @@ public class BackgroundWorld extends World
     public void prepare()
     {   
         board = new Board(this);
-        
-        myHand = new Hand(this, Hand.ME_TYPE);
-        enemyHand = new Hand(this, Hand.ENEMY_TYPE);
-        
+
         endTurnButton = new EndTurnButton(true);
         addObject(endTurnButton, 760, 40);
         
         score = new Score(this);
         
         manager = new Manager(this);
+        
+        myHand = new Hand(this, Hand.ME_TYPE, manager);
+        enemyHand = new Hand(this, Hand.ENEMY_TYPE, manager);
     }
     
     public Board getBoard(){
@@ -65,5 +65,13 @@ public class BackgroundWorld extends World
     
     public EndTurnButton getEndTurnButton(){
         return endTurnButton;
+    }
+    
+    public Hand getMyHand(){
+        return myHand;
+    }
+    
+    public Hand getEnemyHand(){
+        return enemyHand;
     }
 }
