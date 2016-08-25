@@ -20,17 +20,18 @@ public class AttackGraphic extends Actor
         timeStart = System.currentTimeMillis();
     }
     
+    @Override 
+    protected void addedToWorld(World world){
+        text = new Text("-" + attack, 30, Color.BLACK, new Color(0,0,0,0));
+        world.addObject(text, actor.getX(), actor.getY());
+        actor.changeHealth(-1*attack);
+        if(actor.getHealth() < 1){
+            actor.kill();
+        }
+    }
+    
     @Override
     public void act(){
-        if(text == null){   
-            text = new Text("-" + attack, 30, Color.BLACK, new Color(0,0,0,0));
-            getWorld().addObject(text, actor.getX(), actor.getY());
-            
-            actor.changeHealth(-1*attack);
-            if(actor.getHealth() < 1){
-                    actor.kill();
-            }
-        }
         if(System.currentTimeMillis() - timeStart >= 350){
             getWorld().removeObject(text);
             getWorld().removeObject(this);

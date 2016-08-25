@@ -24,6 +24,7 @@ public class BackgroundWorld extends World
     {    
         super(WIDTH, HEIGHT, CELL_SIZE);
         Greenfoot.setSpeed(65);
+        setPaintOrder(CardEffect.class, Card.class);
         prepare();
     }
     
@@ -65,5 +66,9 @@ public class BackgroundWorld extends World
     
     public Hand getHand(){
         return hand;
+    }
+    
+    public Manager getManager(){
+        return manager;
     }
 }

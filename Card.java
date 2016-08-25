@@ -18,20 +18,27 @@ public class Card extends Actor
     protected int slotNum;
     protected int cardNum;
     protected ClickEventListener listener;
+    protected boolean isActed;
     
     public Card(int slotNum){
         this.slotNum = slotNum;
+        isActed = false;
     }
     
     public void act() 
     {
+        if(Greenfoot.mouseDragEnded(this)){
+            showCardEffect(false);
+        }
         if(Greenfoot.mousePressed(this)){
             int button = Greenfoot.getMouseInfo().getButton();
             if(button == 3){
                 showCardEffect(true);
             }
         }
-        if(Greenfoot.mouseClicked(this) && listener != null){
+        if(Greenfoot.mouseClicked(this) 
+                && listener != null
+                && !Greenfoot.mouseDragEnded(null)){
             int button = Greenfoot.getMouseInfo().getButton();
             if(button == 1){
                 listener.onCardLeftClicked(this);
@@ -56,7 +63,7 @@ public class Card extends Actor
     public void showCardEffect(boolean show){
         if(show){
             if(effectText == null){
-                effectText = new Text(cardEffect, 35, Color.WHITE, new Color(0,0,0,180));
+                effectText = new CardEffect(cardEffect, 35, Color.WHITE, new Color(0,0,0,180));
             }
             getWorld().addObject(effectText, 
                     BackgroundWorld.WIDTH/2, 
@@ -71,9 +78,16 @@ public class Card extends Actor
         Greenfoot.delay(550);
     }
     
-    public void use(Me me, ArrayList<Enemy> enemys, Board board, boolean byMe){
+    public void use(){
         showFullCard();
         getImage().setTransparency(0);
+    }
+    
+    public void execute(Me me, ArrayList<Enemy> enemys, boolean byMe){
+    }
+    
+    public boolean isActed(){
+        return isActed;
     }
     
     public interface ClickEventListener{

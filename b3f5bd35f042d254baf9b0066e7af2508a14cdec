@@ -1,0 +1,71 @@
+[33mcommit c62d38bb96e4db74a6ed67a61326942b09543f7d[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Thu Aug 25 15:59:28 2016 +0700
+
+    Play a card
+
+[33mcommit 1956c6c463005bb34435728c564b853951f8d503[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Wed Aug 24 12:39:34 2016 +0700
+
+    Back up before rewrite code
+
+[33mcommit 4b1681d156c2827241d4381b0bc319a65edf8d1b[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Tue Aug 23 22:46:35 2016 +0700
+
+    Display attack graphic
+
+[33mcommit 0d1c7b9c9fcd203ca71d826977825861cff6ec2e[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Tue Aug 23 21:28:18 2016 +0700
+
+    Can attack and restart the game
+
+[33mcommit b3f5bd35f042d254baf9b0066e7af2508a14cdec[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Tue Aug 23 10:23:21 2016 +0700
+
+    Enemy can attack
+
+[33mcommit a9869dab3460b33bfcac6c8ed177ba8ae7c38c17[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Mon Aug 22 22:39:24 2016 +0700
+
+    New algorithm for AttackAction
+
+[33mcommit fedf4bae7cae8235843e3ec62347f87226a1a009[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Mon Aug 22 13:24:34 2016 +0700
+
+    AiManager
+
+[33mcommit 98d7cc7664602962bf5e19b592a0598ddd700387[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Mon Aug 22 01:00:07 2016 +0700
+
+    Make bot move while turn-end-button disable
+
+[33mcommit 4c5ccf5bcdd462974020972e7556642df4d06575[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Sun Aug 21 14:42:17 2016 +0700
+
+    Spawn Character
+
+[33mcommit f6ac1abf6f9366dec4770d2fbfa606fd061f3d2d[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Sun Aug 21 02:27:23 2016 +0700
+
+    Spawn Character
+
+[33mcommit 0ebd67a88173bcf11bbc68341757d151eedd11b0[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Sun Aug 21 00:22:55 2016 +0700
+
+    Change board to tile-map
+
+[33mcommit be6f80c1138eb5529217746bdc52c172766b2572[m
+Author: kanoonsantikul <kanoonsantikul@hotmail.com>
+Date:   Sat Aug 20 22:57:56 2016 +0700
+
+    Positioning Object

@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=CardEffect
+comment0.text=\n\ Write\ a\ description\ of\ class\ CardEffect\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=text\ size\ textColor\ bgColor
+comment1.target=CardEffect(java.lang.String,\ int,\ java.awt.Color,\ java.awt.Color)
+numComments=2

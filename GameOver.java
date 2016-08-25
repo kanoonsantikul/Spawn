@@ -12,7 +12,7 @@ public class GameOver extends World
     private Color textColor;
     private Color bgColor;
     
-    public GameOver(int score)
+    public GameOver(int score, boolean win)
     {    
         super(BackgroundWorld.WIDTH,
                 BackgroundWorld.HEIGHT,
@@ -20,8 +20,14 @@ public class GameOver extends World
         
         textColor = Color.WHITE;
         bgColor = new Color(0,0,0,0);
-                
-        Text gameOverText = new Text("DEFEATED", 50, textColor, bgColor);
+        
+        String winState;
+        if(win){
+            winState = "WON";
+        } else {
+            winState = "DEFEATED";
+        }
+        Text gameOverText = new Text(winState, 50, textColor, bgColor);
         addObject(gameOverText, BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2 - 50);
         Text scoreText = new Text("Longest Survival : " + score, 40, textColor, bgColor);
         addObject(scoreText, BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2 + 20);

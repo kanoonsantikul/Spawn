@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=CardQueue
+comment0.text=\n\ Write\ a\ description\ of\ class\ CardQueue\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=CardQueue()
+comment2.params=card
+comment2.target=void\ add(Card)
+comment3.params=me\ enemys\ byMe
+comment3.target=void\ act(Me,\ java.util.ArrayList,\ boolean)
+comment4.params=listener
+comment4.target=void\ setListener(CardQueue.QueueListener)
+numComments=5

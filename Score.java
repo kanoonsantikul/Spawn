@@ -44,7 +44,7 @@ public class Score
         private static final int TEXT_SIZE = 25;
         
         public ScoreText(int score){
-            setImage(new GreenfootImage("Longest Survival : " + score, TEXT_SIZE, Color.WHITE, new Color(0,0,0,0)));
+            setImage(new GreenfootImage("Survival " + score + " turn", TEXT_SIZE, Color.WHITE, new Color(0,0,0,0)));
         }
     }
 }

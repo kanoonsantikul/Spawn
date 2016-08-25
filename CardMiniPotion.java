@@ -9,26 +9,39 @@ import java.util.ArrayList;
  */
 public class CardMiniPotion extends Card
 {
-    private String EFFECT = "HP + 2";
+    private String EFFECT = "HP + 1";
     private int CARD_NUM = 1;
+    
+    private int addHealth = 1;
+    private boolean prepared;
     
     public CardMiniPotion(int slotNum){
         super(slotNum);
         
         cardEffect = EFFECT;
         cardNum = CARD_NUM;
-    }
+        prepared = false;
+    }    
     
-    public void use(Me me, ArrayList<Enemy> enemys, Board board, boolean byMe){
-        super.use(me ,enemys, board, byMe);
+    public void prepare(Me me, ArrayList<Enemy> enemys, boolean byMe){
+        super.use();
         
         if(byMe){
-            me.changeHealth(2);
+            me.changeHealth(addHealth);
         } else{
             int i = Greenfoot.getRandomNumber(enemys.size());
-            enemys.get(i).changeHealth(2);
+            enemys.get(i).changeHealth(addHealth);
         }
         
-        getWorld().removeObject(this);
+        prepared = true;
+    }
+    
+    public void execute(Me me, ArrayList<Enemy> enemys, boolean byMe){
+        if(!prepared){
+            prepare(me, enemys, byMe);
+        } else{
+            isActed = true;
+            getWorld().removeObject(this);
+        }
     }
 }

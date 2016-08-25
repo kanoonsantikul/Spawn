@@ -12,15 +12,18 @@ public class Manager implements
         Tile.ClickCallbackListener,
         Enemy.EventListener,
         AiManager.OnExecutionCompleteListener,
-        Card.ClickEventListener
+        Card.ClickEventListener,
+        CardQueue.QueueListener
 {  
     private static final int STARTER_ENEMY = 5;
     
     private BackgroundWorld world;
     private boolean isMyTurn = true;
     private int myCardUseCount;
+    private int playAbleCard = 2;
     
     private AiManager aiManager;
+    private CardQueue cardQueue;
     private Me me;
     private ArrayList<Enemy> enemys;
     
@@ -40,7 +43,7 @@ public class Manager implements
         
         enemys = new ArrayList<Enemy>();
         for(int i=0; i<STARTER_ENEMY; i++){
-            Enemy enemy = new Enemy();
+            Enemy enemy = new Minion();
             enemys.add(enemy);
             enemy.setListener(this);
             new SpawnAction(world, enemy);
@@ -49,14 +52,17 @@ public class Manager implements
         aiManager = new AiManager(board, me);
         aiManager.setListener(this);
         
+        cardQueue = new CardQueue();
+        cardQueue.setListener(this);
+        
         setupStartTurn();
     }
     
     @Override 
     public void onCardLeftClicked(Card card){
-        if(myCardUseCount < 2){
+        if(myCardUseCount < playAbleCard){
+            cardQueue.add(card);
             myCardUseCount++;
-            card.use(me, enemys, world.getBoard(), true);
             world.getHand().notifyCardUse(card.getSlotNum(), -1);
         }
     }
@@ -71,7 +77,9 @@ public class Manager implements
         world.getBoard().hidePossibleRange(me);
         
         isMyTurn = false;
-        aiManager.execute(enemys, world.getHand());
+        for(int i=0; i<playAbleCard; i++){
+            drawCard();
+        }
     }
     
     @Override
@@ -107,9 +115,13 @@ public class Manager implements
     public void onCreatureKilled(Creature actor){
         if(actor instanceof Enemy){
             enemys.remove(actor);
+            if(enemys.size() == 0){
+                world.repaint();
+                Greenfoot.setWorld(new GameOver(world.getScore().getScore(), true));
+            }
         } else if(actor instanceof Me){
             world.repaint();
-            Greenfoot.setWorld(new GameOver(world.getScore().getScore()));
+            Greenfoot.setWorld(new GameOver(world.getScore().getScore(), false));
         }
     }
     
@@ -119,12 +131,31 @@ public class Manager implements
         world.getScore().addScore();
     }
     
+    @Override
+    public void onQueueComplete(boolean byMe){
+        if(!byMe){
+            aiManager.execute(enemys, world.getHand());
+        }
+    }
+    
+    private void drawCard(){
+        int slotNum;
+        Card card;
+        do{
+            slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
+            card = world.getHand().getCard(slotNum);
+        }while(card == null);
+        cardQueue.add(card);
+        world.getHand().notifyCardUse(slotNum, -1);
+    }
+    
     public void act(){
         if((!me.getIsMoved() || !me.getIsAttacked())
                 && isMyTurn
                 && !me.hasAction()){
             world.getBoard().showPossibleRange(me);
         }
+        cardQueue.act(me, enemys, isMyTurn);
         aiManager.act();
     }
 

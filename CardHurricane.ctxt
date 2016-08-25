@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CardHurricane
+comment0.text=\n\ Write\ a\ description\ of\ class\ KeeperAlarm\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=slotNum
+comment1.target=CardHurricane(int)
+comment2.params=me\ enemys\ byMe
+comment2.target=void\ prepare(Me,\ java.util.ArrayList,\ boolean)
+comment3.params=me\ enemys\ byMe
+comment3.target=void\ execute(Me,\ java.util.ArrayList,\ boolean)
+numComments=4

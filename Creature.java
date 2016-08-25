@@ -12,7 +12,7 @@ public class Creature extends Actor
 {
     public static final int SPEED = 1;
    
-     protected int position;
+    protected int position;
     protected int range;
     protected int attack;
     protected int health;
@@ -65,20 +65,16 @@ public class Creature extends Actor
     public Text getStateText(){
         return stateText;
     }
-       
-    public Text makeStateText(){
-        return new Text("ATK:" + attack + "  HP:" + health, 
-                    15, 
-                    Color.WHITE, 
-                    new Color(0, 0, 0, 150));
-    }
     
-    public void drawStateText(){
+    private void drawStateText(){
         World world = getWorld();
         if(stateText != null){
             world.removeObject(stateText);
         }
-        stateText = makeStateText();
+        stateText = new Text("ATK:" + attack + "  HP:" + health, 
+                    15, 
+                    Color.WHITE, 
+                    new Color(0, 0, 0, 150));
         world.addObject(stateText,
                 getX(),
                 getY() + getImage().getHeight()/2);

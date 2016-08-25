@@ -14,7 +14,6 @@ public class AiManager
     private Me me;
     private ArrayList<Enemy> enemys;
     
-    private int enemyCardUseCount;
     private int queue;
     private boolean isExecuting = false;
     private OnExecutionCompleteListener listener;
@@ -36,18 +35,14 @@ public class AiManager
         }
         isExecuting = true;
         queue = 0;
-        enemyCardUseCount = 0;
+        Greenfoot.delay(200);
     }
     
     public void act(){
         if(isExecuting){
             Creature actor = enemys.get(queue);
-            if(enemyCardUseCount < 2){
-                for(int i=0; i<2; i++){
-                    drawCard();
-                }
-            }
-            if(!actor.getIsMoved()){
+    
+            if(!actor.getIsMoved() && !(actor instanceof GuardKeeper)){
                 if(!actor.hasAction()){
                     move(actor);
                 }
@@ -71,19 +66,7 @@ public class AiManager
         }
     }
     
-    private void drawCard(){
-        Greenfoot.delay(200);
-        enemyCardUseCount++;
-        
-        int slotNum;
-        do{
-            slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
-        }while(hand.getCard(slotNum) == null);
-        
-        Card card = hand.getCard(slotNum);
-        card.use(me, enemys, board, false);
-        hand.notifyCardUse(slotNum, -1);
-    }
+
     
     private void attack(Creature actor){
         tiles = board.getPossibleRange(actor);
@@ -104,16 +87,20 @@ public class AiManager
     
     private void move(Creature actor){
         tiles = board.getPossibleRange(actor);
-        board.showPossibleRange(actor);
-        Greenfoot.delay(300);
-        board.hidePossibleRange(actor);
-    
-        int position;
-        do{
-            position = Greenfoot.getRandomNumber(tiles.size());
-        }while(!board.getIsEmpty(tiles.get(position).getPosition()));
-                    
-        new MoveAction(tiles.get(position).getPosition(), actor, board);
+        
+        if(tiles.size() > 0){
+            board.showPossibleRange(actor);
+            Greenfoot.delay(300);
+            board.hidePossibleRange(actor);
+            
+            
+            int position;
+            do{
+                position = Greenfoot.getRandomNumber(tiles.size());
+            }while(!board.getIsEmpty(tiles.get(position).getPosition()));
+                        
+            new MoveAction(tiles.get(position).getPosition(), actor, board);
+        }
     }
     
     public void setListener(OnExecutionCompleteListener listener){

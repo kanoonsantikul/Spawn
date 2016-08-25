@@ -9,35 +9,49 @@ import java.util.ArrayList;
  */
 public class CardThunderBolt extends Card
 {
-    private String EFFECT = "deal 1 damage to all opponent";
+    private String EFFECT = "deal 1 damage to all character";
     private int CARD_NUM = 0;
+    
+    private int attack = 1;
+    private long timeStart;
+    private boolean prepared;
     
     public CardThunderBolt(int slotNum){
         super(slotNum);
         
         cardEffect = EFFECT;
         cardNum = CARD_NUM;
+        prepared = false;
     }
     
-    public void use(Me me, ArrayList<Enemy> enemys, Board board, boolean byMe){
-        super.use(me ,enemys, board, byMe);
+    public void prepare(Me me, ArrayList<Enemy> enemys, boolean byMe){
+        super.use();
         
-        if(byMe){
-            Enemy enemy;
-            for(int i=0; i<enemys.size(); i++){
-                enemy = enemys.get(i);
-                getWorld().addObject(
-                        new AttackGraphic(enemy, 1),
-                        enemy.getX(), 
-                       enemy.getY());
-            }
-        } else{
+        ArrayList<Creature> actors = new ArrayList<Creature>();
+        actors.addAll(enemys);
+        actors.add(me);
+        
+        Creature actor;
+        for(int i=0; i<actors.size(); i++){
+            actor = actors.get(i);
+            System.out.println(actor.toString() + " " + i + " " + actors.size());
             getWorld().addObject(
-                    new AttackGraphic(me, 1), 
-                    me.getX(),
-                    me.getY());
+                    new AttackGraphic(actor, attack),
+                    actor.getX(), 
+                    actor.getY());
         }
         
-        getWorld().removeObject(this);
+        timeStart = System.currentTimeMillis();
+        
+        prepared = true;
+    }
+    
+    public void execute(Me me, ArrayList<Enemy> enemys, boolean byMe){
+        if(!prepared){
+            prepare(me, enemys, byMe);
+        } else if(System.currentTimeMillis() - timeStart >= 350){
+            isActed = true;
+            getWorld().removeObject(this);
+        }
     }
 }
