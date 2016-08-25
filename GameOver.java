@@ -9,31 +9,29 @@ import java.awt.Color;
  */
 public class GameOver extends World
 {   
+    private Color textColor;
+    private Color bgColor;
+    
     public GameOver(int score)
     {    
         super(BackgroundWorld.WIDTH,
                 BackgroundWorld.HEIGHT,
                 BackgroundWorld.CELL_SIZE);
         
-        Text gameOverText = new Text("DEFEATED", 50);
+        textColor = Color.WHITE;
+        bgColor = new Color(0,0,0,0);
+                
+        Text gameOverText = new Text("DEFEATED", 50, textColor, bgColor);
         addObject(gameOverText, BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2 - 50);
-        Text scoreText = new Text("Longest Survival : " + score, 40);
+        Text scoreText = new Text("Longest Survival : " + score, 40, textColor, bgColor);
         addObject(scoreText, BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2 + 20);
-        Text instructText = new Text("Click Anywhere to restart", 20);
+        Text instructText = new Text("Click Anywhere to restart", 20, textColor, bgColor);
         addObject(instructText, BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2 + 50);
     }
     
     public void act(){
         if(Greenfoot.mouseClicked(this)){
             Greenfoot.setWorld(new BackgroundWorld());
-        }
-    }
-    
-    public class Text extends Actor{
-        public Text(String text, int size){
-            GreenfootImage textImage 
-                    = new GreenfootImage(text, size, Color.WHITE, new Color(0,0,0,0));
-            setImage(textImage);
         }
     }
 }

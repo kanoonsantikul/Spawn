@@ -59,12 +59,12 @@ public class Board
         return getTile(tileNum).getY();
     }
     
-    public boolean getIsEmpty(int tileNum){
-        return getTile(tileNum).getIsEmpty();
+    public boolean getEmptiness(int tileNum){
+        return getTile(tileNum).getEmptiness();
     }
     
-    public void setIsEmpty(int tileNum, boolean isEmpty){
-        getTile(tileNum).setIsEmpty(isEmpty);
+    public void setEmptiness(int tileNum, boolean isEmpty){
+        getTile(tileNum).setEmptiness(isEmpty);
     }
     
     public ArrayList<Tile> getPossibleRange(Creature actor){

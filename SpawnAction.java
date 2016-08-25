@@ -14,14 +14,13 @@ public class SpawnAction extends Action
         int position = 0;
         do{
             position = Greenfoot.getRandomNumber(Board.BOARD_NUM);
-        }while(!board.getEmptiness(position));
+        }while(!board.getIsEmpty(position));
         
         world.addObject(actor,
                 board.getTileX(position), 
                 board.getTileY(position));
-        actor.drawStateText();
             
-        board.setEmptiness(position, false);
+        board.setIsEmpty(position, false);
         actor.setPosition(position);
     }
 }

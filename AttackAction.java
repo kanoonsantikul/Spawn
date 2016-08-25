@@ -39,13 +39,13 @@ public class AttackAction extends Action
                
                 to.getWorld().addObject(
                         new AttackGraphic(to, from.getAttack()),
-                        to.getX(),
+                        to.getX(), 
                         to.getY());
                 moveAction = new MoveAction(tempFromPosition, from, board);
             }
         } else{
             if(from.getIsMoved()){
-                board.setEmptiness(tempToPosition, false);
+                board.setIsEmpty(tempToPosition, false);
                 from.setIsAttacked(true);
                 from.setIsMoved(tempIsMoved);
                 from.removeAction(this);

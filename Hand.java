@@ -7,76 +7,79 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Hand{
-    public static final byte ME_TYPE = 1;
-    public static final byte ENEMY_TYPE = 2;
-    public static final int FULL_HAND = 4;
-        
-    private int cardCount;
-    private Card[] cards;
+    public static final int FULL_HAND = 8;
+    
     private World world;
-    private byte type;
     private Manager manager;
+    
+    private Card[] cards;
+    private int cardCount;
             
-    public Hand(World world, byte type, Manager manager){
+    public Hand(World world, Manager manager){
         cardCount = 0;
         cards = new Card[FULL_HAND];
         
         this.world = world;
-        this.type = type;
         this.manager = manager;
-    }
         
-    public void act(){
         checkCard();
     }
     
-    public Card getCard(int position){
-        return cards[position];
-    }
-    
-    private void checkCard(){
-        if(cardCount < FULL_HAND){
-           int slotNum = getEmptySlot();
-           draw(slotNum);
-        }
+    public void notifyCardUse(int slotNum, int diff){
+        cardCount += diff;
+        cards[slotNum] = null;
     }
     
     public void draw(int slotNum){
         int cardNum = Greenfoot.getRandomNumber(DeckReference.MAX_CARD);
         Card card = DeckReference.getCard(cardNum, slotNum);
-        int cardY = getCardY(slotNum, card);
-        int cardX = getCardX(card);
         card.setListener(manager);
-
+        
+        int cardY = getCardY(slotNum);
+        int cardX = getCardX(slotNum);
         if(world != null){
             world.addObject(card, cardX, cardY);
-        }
-        cards[slotNum] = card;
+        }      cards[slotNum] = card;
         cardCount++;
+    }
+    
+    public void checkCard(){
+        for(int i=0; i<FULL_HAND; i++){
+            int slot = getEmptySlot();
+            if(slot != -1){
+                draw(slot);
+            }
+        }
+    }
+    
+    public Card getCard(int slotNum){
+        return cards[slotNum];
     }
         
     private int getEmptySlot(){
         int i = 0;
         for(i=0; i<FULL_HAND; i++){
             if(cards[i] == null){
-                break;
+                return i;
             }
         }
-        return i;
+        return -1;
     }
     
-    private int getCardY(int slotNum, Card card){
+    private int getCardY(int slotNum){
+        slotNum++;   
+        if(slotNum > 4) slotNum -= 4;
+        
         int y;
-        slotNum++;
-        y = (BackgroundWorld.HEIGHT * slotNum/FULL_HAND) 
+        y = (BackgroundWorld.HEIGHT/(FULL_HAND/2) * slotNum) 
                 - (Card.HEIGHT/2) - 8;
         return y;
     }
     
-    private int getCardX(Card card){
+    private int getCardX(int slotNum){
         int x;
         x = 26 + Card.WIDTH/2;
-        if(type == ENEMY_TYPE){
+        if(slotNum > 3){
             x = BackgroundWorld.WIDTH - x;
         }
         return x;

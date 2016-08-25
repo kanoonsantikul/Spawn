@@ -13,13 +13,16 @@ public class Manager implements
         Enemy.EventListener,
         AiManager.OnExecutionCompleteListener,
         Card.ClickEventListener
-{    
+{  
+    private static final int STARTER_ENEMY = 5;
+    
     private BackgroundWorld world;
     private boolean isMyTurn = true;
+    private int myCardUseCount;
     
     private AiManager aiManager;
     private Me me;
-    private ArrayList<Creature> enemys;
+    private ArrayList<Enemy> enemys;
     
     public Manager(BackgroundWorld world){
         this.world = world;
@@ -35,8 +38,8 @@ public class Manager implements
         me.setListener(this);
         new SpawnAction(world, me);
         
-        enemys = new ArrayList<Creature>();
-        for(int i=0; i<3; i++){
+        enemys = new ArrayList<Enemy>();
+        for(int i=0; i<STARTER_ENEMY; i++){
             Enemy enemy = new Enemy();
             enemys.add(enemy);
             enemy.setListener(this);
@@ -44,15 +47,18 @@ public class Manager implements
         }
         
         aiManager = new AiManager(board, me);
-        aiManager.addCreature(enemys);
         aiManager.setListener(this);
         
         setupStartTurn();
     }
     
     @Override 
-    public void onCardLeftClicked(int slotNum){
-       //world.getMyHand().getCard(slotNum).use(me, enemys, world.getBoard());
+    public void onCardLeftClicked(Card card){
+        if(myCardUseCount < 2){
+            myCardUseCount++;
+            card.use(me, enemys, world.getBoard(), true);
+            world.getHand().notifyCardUse(card.getSlotNum(), -1);
+        }
     }
     
     @Override 
@@ -65,7 +71,7 @@ public class Manager implements
         world.getBoard().hidePossibleRange(me);
         
         isMyTurn = false;
-        aiManager.execute();
+        aiManager.execute(enemys, world.getHand());
     }
     
     @Override
@@ -101,7 +107,6 @@ public class Manager implements
     public void onCreatureKilled(Creature actor){
         if(actor instanceof Enemy){
             enemys.remove(actor);
-            aiManager.removeCreature(actor);
         } else if(actor instanceof Me){
             world.repaint();
             Greenfoot.setWorld(new GameOver(world.getScore().getScore()));
@@ -128,5 +133,10 @@ public class Manager implements
         isMyTurn = true;
         me.setIsMoved(false);
         me.setIsAttacked(false);
+        myCardUseCount = 0;
+        
+        if(world.getHand() != null){
+            world.getHand().checkCard();
+        }
     }
 }

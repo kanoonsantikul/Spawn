@@ -61,11 +61,11 @@ public class Tile extends Actor{
         }
     }
 
-    public boolean getEmptiness(){
+    public boolean getIsEmpty(){
         return isEmpty;
     }
 
-    public void setEmptiness(boolean isEmpty){
+    public void setIsEmpty(boolean isEmpty){
         this.isEmpty = isEmpty;
     }
     

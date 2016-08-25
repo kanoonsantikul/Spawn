@@ -14,7 +14,7 @@ public class Card extends Actor
     public static final int HEIGHT = 145;
     
     protected String cardEffect = "test";
-    protected EffectText effectText;
+    protected Text effectText;
     protected int slotNum;
     protected int cardNum;
     protected ClickEventListener listener;
@@ -34,7 +34,7 @@ public class Card extends Actor
         if(Greenfoot.mouseClicked(this) && listener != null){
             int button = Greenfoot.getMouseInfo().getButton();
             if(button == 1){
-                listener.onCardLeftClicked(slotNum);
+                listener.onCardLeftClicked(this);
             } else if(button == 3){
                 showCardEffect(false);
             }
@@ -56,7 +56,7 @@ public class Card extends Actor
     public void showCardEffect(boolean show){
         if(show){
             if(effectText == null){
-                effectText = new EffectText(cardEffect);
+                effectText = new Text(cardEffect, 35, Color.WHITE, new Color(0,0,0,180));
             }
             getWorld().addObject(effectText, 
                     BackgroundWorld.WIDTH/2, 
@@ -66,19 +66,18 @@ public class Card extends Actor
         }
     }
     
-    public void use(Me me, ArrayList<Enemy> enemys, Board board){
+    public void showFullCard(){
+        setLocation(BackgroundWorld.WIDTH/2, BackgroundWorld.HEIGHT/2);
+        Greenfoot.delay(550);
+    }
+    
+    public void use(Me me, ArrayList<Enemy> enemys, Board board, boolean byMe){
+        showFullCard();
+        getImage().setTransparency(0);
     }
     
     public interface ClickEventListener{
-        public void onCardLeftClicked(int slotNum);
+        public void onCardLeftClicked(Card card);
         public void onCardRightClicked(int slotNum);
-    }
-    
-    public class EffectText extends Actor{
-        public EffectText(String text){
-            GreenfootImage textImage 
-                    = new GreenfootImage(text, 35, Color.WHITE, new Color(0,0,0,180));
-            setImage(textImage);
-        }
     }
 }

@@ -17,7 +17,7 @@ public class BackgroundWorld extends World
     private Score score;
     private Manager manager;
     private EndTurnButton endTurnButton;
-    private Hand myHand;
+    private Hand hand;
     private Hand enemyHand;
 
     public BackgroundWorld()
@@ -28,9 +28,6 @@ public class BackgroundWorld extends World
     }
     
     public void act(){
-        if(myHand != null) myHand.act();
-        if(enemyHand != null) enemyHand.act();
-        
         if(manager != null){
             manager.act();
         }
@@ -51,8 +48,7 @@ public class BackgroundWorld extends World
         
         manager = new Manager(this);
         
-        myHand = new Hand(this, Hand.ME_TYPE, manager);
-        enemyHand = new Hand(this, Hand.ENEMY_TYPE, manager);
+        hand = new Hand(this, manager);
     }
     
     public Board getBoard(){
@@ -67,11 +63,7 @@ public class BackgroundWorld extends World
         return endTurnButton;
     }
     
-    public Hand getMyHand(){
-        return myHand;
-    }
-    
-    public Hand getEnemyHand(){
-        return enemyHand;
+    public Hand getHand(){
+        return hand;
     }
 }

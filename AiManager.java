@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class AiManager  
 {
     private Board board;
+    private Hand hand;
     private Me me;
-    private ArrayList<Creature> creatures;
+    private ArrayList<Enemy> enemys;
     
+    private int enemyCardUseCount;
     private int queue;
     private boolean isExecuting = false;
     private OnExecutionCompleteListener listener;
@@ -21,33 +23,30 @@ public class AiManager
     public AiManager(Board board, Me me){
         this.board = board;
         this.me = me;
-        creatures = new ArrayList<Creature>();
+        enemys = new ArrayList<Enemy>();
     }
     
-    public void addCreature(Creature actor){
-        creatures.add(actor);
-    }
-    
-    public void addCreature(ArrayList<Creature> actors){
-        creatures.addAll(actors);
-    }
-    
-    public void removeCreature(Creature actor){
-        creatures.remove(actor);
-    }
-    
-    public void execute(){
-        for(int i=0; i<creatures.size(); i++){
-            creatures.get(i).setIsMoved(false);
-            creatures.get(i).setIsAttacked(false);
+    public void execute(ArrayList<Enemy> enemys, Hand hand){
+        this.enemys = enemys;
+        this.hand = hand;
+        
+        for(int i=0; i<enemys.size(); i++){
+            enemys.get(i).setIsMoved(false);
+            enemys.get(i).setIsAttacked(false);
         }
         isExecuting = true;
         queue = 0;
+        enemyCardUseCount = 0;
     }
     
     public void act(){
         if(isExecuting){
-            Creature actor = creatures.get(queue);
+            Creature actor = enemys.get(queue);
+            if(enemyCardUseCount < 2){
+                for(int i=0; i<2; i++){
+                    drawCard();
+                }
+            }
             if(!actor.getIsMoved()){
                 if(!actor.hasAction()){
                     move(actor);
@@ -63,13 +62,27 @@ public class AiManager
                 Greenfoot.delay(100);
             }
             
-            if(queue == creatures.size()){
+            if(queue == enemys.size()){
                 isExecuting = false;
                 if(listener != null){
                     listener.onExecutionComplete();
                 }
             }
         }
+    }
+    
+    private void drawCard(){
+        Greenfoot.delay(200);
+        enemyCardUseCount++;
+        
+        int slotNum;
+        do{
+            slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
+        }while(hand.getCard(slotNum) == null);
+        
+        Card card = hand.getCard(slotNum);
+        card.use(me, enemys, board, false);
+        hand.notifyCardUse(slotNum, -1);
     }
     
     private void attack(Creature actor){
@@ -98,7 +111,7 @@ public class AiManager
         int position;
         do{
             position = Greenfoot.getRandomNumber(tiles.size());
-        }while(!board.getEmptiness(tiles.get(position).getPosition()));
+        }while(!board.getIsEmpty(tiles.get(position).getPosition()));
                     
         new MoveAction(tiles.get(position).getPosition(), actor, board);
     }

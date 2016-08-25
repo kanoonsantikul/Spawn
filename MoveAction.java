@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MoveAction extends Action 
 {
     private Creature actor;
-    private Creature.StateText stateText;
+    private Text stateText;
     private int targetX, targetY;
     private int speedX, speedY;
     
@@ -18,8 +18,8 @@ public class MoveAction extends Action
         this.actor = actor;
         this.stateText = actor.getStateText();
         
-        board.setEmptiness(actor.getPosition(), true);
-        board.setEmptiness(position, false);
+        board.setIsEmpty(actor.getPosition(), true);
+        board.setIsEmpty(position, false);
         actor.setPosition(position);
         
         targetX = board.getTileX(position);

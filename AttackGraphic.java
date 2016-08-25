@@ -18,31 +18,22 @@ public class AttackGraphic extends Actor
         this.attack = attack;
         this.actor = actor;
         timeStart = System.currentTimeMillis();
-
     }
     
     @Override
     public void act(){
-        if(text == null){
-            text = new Text("-" + attack, 30);
+        if(text == null){   
+            text = new Text("-" + attack, 30, Color.BLACK, new Color(0,0,0,0));
             getWorld().addObject(text, actor.getX(), actor.getY());
-        }
-        if(System.currentTimeMillis() - timeStart >= 270){
-            getWorld().removeObject(text);
-            getWorld().removeObject(this);
-            actor.changeHealth(-1*attack);
             
+            actor.changeHealth(-1*attack);
             if(actor.getHealth() < 1){
-                actor.kill();
+                    actor.kill();
             }
         }
-    }
-    
-    public class Text extends Actor{
-        public Text(String text, int size){
-            GreenfootImage textImage 
-                    = new GreenfootImage(text, size, Color.BLACK, new Color(0,0,0,0));
-            setImage(textImage);
+        if(System.currentTimeMillis() - timeStart >= 350){
+            getWorld().removeObject(text);
+            getWorld().removeObject(this);
         }
     }
 }
