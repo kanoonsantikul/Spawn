@@ -2,21 +2,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Write a description of class CardPotion here.
+ * Write a description of class CardVoidCaller here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CardPotion extends Card
+public class CardVoidCaller extends Card
 {
-    private String EFFECT = "Give 4 HP to one that play this card and 2 to an enemy";
+    private String EFFECT = "Replace 3 card with \'the Void\'";
     private int CARD_NUM = 1;
     
-    private int addMyHealth = 4;
-    private int addEnemyHealth = 2; 
+    private int cardReplace = 2;
     private boolean prepared;
     
-    public CardPotion(int slotNum){
+    public CardVoidCaller(int slotNum){
         super(slotNum);
         
         cardEffect = EFFECT;
@@ -27,20 +26,13 @@ public class CardPotion extends Card
     public void prepare(Me me, ArrayList<Enemy> enemys, boolean byMe){
         super.use();
         
-        int position;
-        do{
-            position = Greenfoot.getRandomNumber(enemys.size());
-        }while(enemys.get(position) == null);
-        Enemy enemy = enemys.get(position);
-        
-        if(byMe){
-            me.changeHealth(addMyHealth);
-            enemy.changeHealth(addEnemyHealth);
-        } else{
-            me.changeHealth(addEnemyHealth);
-            enemy.changeHealth(addMyHealth);
+        Hand hand = ((BackgroundWorld)getWorld()).getHand();
+        for(int i=0; i<cardReplace; i++){
+            int slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
+            Card card = new CardTheVoid(slotNum);
+            card.setListener(((BackgroundWorld)getWorld()).getManager());
+            hand.setCard(slotNum, card);
         }
-        
         prepared = true;
     }
     
@@ -51,5 +43,5 @@ public class CardPotion extends Card
             isActed = true;
             getWorld().removeObject(this);
         }
-    }
+    }  
 }

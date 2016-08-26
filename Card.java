@@ -13,7 +13,7 @@ public class Card extends Actor
     public static final int WIDTH = 141;
     public static final int HEIGHT = 145;
     
-    protected String cardEffect = "test";
+    protected String cardEffect;
     protected Text effectText;
     protected int slotNum;
     protected int cardNum;

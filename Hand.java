@@ -30,24 +30,31 @@ public class Hand{
         cards[slotNum] = null;
     }
     
-    public void draw(int slotNum){
-        int cardNum = Greenfoot.getRandomNumber(DeckReference.MAX_CARD);
-        Card card = DeckReference.getCard(cardNum, slotNum);
-        card.setListener(manager);
+    public void setCard(int slotNum, Card card){
+        if(cards[slotNum] != null){
+            world.removeObject(cards[slotNum]);
+        }
+        
+        if(card == null){
+            int cardNum = Greenfoot.getRandomNumber(DeckReference.MAX_CARD);
+            card = DeckReference.getCard(cardNum, slotNum);
+            card.setListener(manager);
+        }
         
         int cardY = getCardY(slotNum);
         int cardX = getCardX(slotNum);
         if(world != null){
             world.addObject(card, cardX, cardY);
-        }      cards[slotNum] = card;
-        cardCount++;
+        }      
+        cards[slotNum] = card;
     }
     
     public void checkCard(){
         for(int i=0; i<FULL_HAND; i++){
             int slot = getEmptySlot();
             if(slot != -1){
-                draw(slot);
+                setCard(slot, null);
+                cardCount++;
             }
         }
     }

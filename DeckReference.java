@@ -6,7 +6,7 @@
  */
 public class DeckReference
 {
-    public static int MAX_CARD = 6;
+    public static int MAX_CARD = 8;
     
     public static Card getCard(int cardNum, int slotNum){
         switch(cardNum){
@@ -22,6 +22,10 @@ public class DeckReference
                 return new CardSkeleton(slotNum);
             case 5:
                 return new CardMythDragon(slotNum);
+            case 6:
+                return new CardPotion(slotNum);
+            case 7: 
+                return new CardVoidCaller(slotNum);
             default:
                 return new Card(slotNum);
         }

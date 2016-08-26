@@ -34,7 +34,6 @@ public class CardThunderBolt extends Card
         Creature actor;
         for(int i=0; i<actors.size(); i++){
             actor = actors.get(i);
-            System.out.println(actor.toString() + " " + i + " " + actors.size());
             getWorld().addObject(
                     new AttackGraphic(actor, attack),
                     actor.getX(), 

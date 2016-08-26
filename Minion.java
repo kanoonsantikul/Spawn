@@ -10,7 +10,7 @@ public class Minion extends Enemy
 {
     public Minion(){
         range = 1;
-        attack = 3;
+        attack = 1;
         health = 3;
     }
 }

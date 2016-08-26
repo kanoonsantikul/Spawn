@@ -2,19 +2,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Write a description of class CardMythDragon here.
+ * Write a description of class CardTheVoid here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CardMythDragon extends Card
+public class CardTheVoid extends Card
 {
-    private String EFFECT = "Summon Myth Dragon at random position";
+    private String EFFECT = "I am 'The Void' I have no effect";
     private int CARD_NUM = 2;
     
     private boolean prepared;
     
-    public CardMythDragon(int slotNum){
+    public CardTheVoid(int slotNum){
         super(slotNum);
         
         cardEffect = EFFECT;
@@ -24,12 +24,6 @@ public class CardMythDragon extends Card
     
     public void prepare(Me me, ArrayList<Enemy> enemys, boolean byMe){
         super.use();
-        
-        BackgroundWorld world = (BackgroundWorld)getWorld();
-        Enemy enemy = new MythDragon();
-        enemys.add(enemy);
-        enemy.setListener(world.getManager());
-        new SpawnAction(world, enemy);
         
         prepared = true;
     }
@@ -41,5 +35,6 @@ public class CardMythDragon extends Card
             isActed = true;
             getWorld().removeObject(this);
         }
-    }    
+    }       
+    
 }

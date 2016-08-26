@@ -76,9 +76,10 @@ public class Manager implements
     public void onEndTurnClicked(){
         world.getBoard().hidePossibleRange(me);
         
+        Greenfoot.delay(200);
         isMyTurn = false;
         for(int i=0; i<playAbleCard; i++){
-            drawCard();
+            useCard();
         }
     }
     
@@ -138,7 +139,7 @@ public class Manager implements
         }
     }
     
-    private void drawCard(){
+    private void useCard(){
         int slotNum;
         Card card;
         do{

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class CardMiniPotion extends Card
 {
-    private String EFFECT = "HP + 1";
+    private String EFFECT = "Give your character 1 HP";
     private int CARD_NUM = 1;
     
     private int addHealth = 1;
