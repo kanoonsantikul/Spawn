@@ -42,6 +42,8 @@ public class Creature extends Actor
     
     @Override
     protected void addedToWorld(World world){
+        Greenfoot.playSound("spawn-sound.wav");
+        
         drawStateText();
     }
     

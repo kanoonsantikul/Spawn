@@ -18,6 +18,8 @@ public class AttackGraphic extends Actor
         this.attack = attack;
         this.actor = actor;
         timeStart = System.currentTimeMillis();
+        
+        Greenfoot.playSound("attack-sound.wav");
     }
     
     @Override 

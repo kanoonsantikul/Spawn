@@ -11,10 +11,11 @@ public class Score
 {
     private static final int X = 200;
     private static final int Y = 40;
+    private static final int TEXT_SIZE = 25;
     
     private World world;
     private int score;
-    private ScoreText text;
+    private Text text;
     
     public Score(World world){
         this.world = world;
@@ -36,15 +37,7 @@ public class Score
             world.removeObject(text);
         }
  
-        text = new ScoreText(score);
+        text = new Text("Survival " + score + " turn", TEXT_SIZE, Color.WHITE, new Color(0,0,0,0));
         world.addObject(text, X + text.getImage().getWidth()/2, Y);
-    }
-    
-    public class ScoreText extends Actor{
-        private static final int TEXT_SIZE = 25;
-        
-        public ScoreText(int score){
-            setImage(new GreenfootImage("Survival " + score + " turn", TEXT_SIZE, Color.WHITE, new Color(0,0,0,0)));
-        }
     }
 }

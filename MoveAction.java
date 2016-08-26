@@ -13,10 +13,13 @@ public class MoveAction extends Action
     private int targetX, targetY;
     private int speedX, speedY;
     
+    private Board board;
+    
     public MoveAction(int position, Creature actor, Board board){
         super(actor);
         this.actor = actor;
         this.stateText = actor.getStateText();
+        this.board = board;
         
         board.setIsEmpty(actor.getPosition(), true);
         board.setIsEmpty(position, false);
@@ -44,8 +47,8 @@ public class MoveAction extends Action
             stateText.setLocation(stateText.getX(), stateText.getY() + + speedY);
         }
         if(actor.getX() == targetX && actor.getY() == targetY){
-            actor.removeAction(this);
             actor.setIsMoved(true);
+            actor.removeAction(this);
         }
     }
 }

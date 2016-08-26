@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class CardHurricane extends Card
 {
-    private String EFFECT = "Change position of all character";
+    private String EFFECT = "Random change position of all character";
     private int CARD_NUM = 2;
     
     private boolean prepared;

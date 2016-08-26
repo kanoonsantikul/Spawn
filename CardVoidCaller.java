@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class CardVoidCaller extends Card
 {
-    private String EFFECT = "Replace 3 card with \'the Void\'";
+    private String EFFECT = "Replace 2 card with \'the Void\'";
     private int CARD_NUM = 1;
     
     private int cardReplace = 2;
@@ -28,7 +28,10 @@ public class CardVoidCaller extends Card
         
         Hand hand = ((BackgroundWorld)getWorld()).getHand();
         for(int i=0; i<cardReplace; i++){
-            int slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
+            int slotNum;
+            do{
+                slotNum = Greenfoot.getRandomNumber(Hand.FULL_HAND);
+            }while(hand.getCard(slotNum) == null);
             Card card = new CardTheVoid(slotNum);
             card.setListener(((BackgroundWorld)getWorld()).getManager());
             hand.setCard(slotNum, card);

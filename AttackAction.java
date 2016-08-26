@@ -1,3 +1,5 @@
+import greenfoot.*;
+
 /**
  * Write a description of class AttackAction here.
  * 
@@ -33,7 +35,7 @@ public class AttackAction extends Action
             moveAction = new MoveAction(to.getPosition(), from, board);
         }
         if(!isReachedTarget){
-            if(from.getIsMoved()){
+            if(from.getIsMoved()){           
                 isReachedTarget = true;
                 from.setIsMoved(false);
                
